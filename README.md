@@ -54,6 +54,10 @@ ResolverReplace.configure(
 
 See [CHANGELOG.md](CHANGELOG.md) for details.
 
+## See Also
+
+* [例えば Resolver をすげかえる - sonots:blog](http://blog.livedoor.jp/sonots/archives/38822072.html)
+
 ## Contributing
 
 1. Fork it
