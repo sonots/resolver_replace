@@ -20,14 +20,14 @@ This gem works similarly, but allows to replace the resolver with your favorite 
 For example, if you want to replace the resolver with `Resolv::DNS`, write as followings:
 
 ```ruby
-require 'resolve' # Resolve::DNS
-require 'resolver-replace' # ResolverReplace
+require 'resolv' # Resolv::DNS
+require 'resolver_replace' # ResolverReplace
 
 resolver = Resolv::DNS.new(:nameserver => ['210.251.121.21'],
                            :search => ['ruby-lang.org'],
                            :ndots => 1)
 
-ResolverReplace.configure(
+ResolverReplace.register!(
   getaddress: Proc.new {|host| resolver.getaddress(host) },
   getaddresses: Proc.new {|host| resolver.getaddresses(host) },
   error_class: Resolv::ResolvError,
@@ -43,7 +43,7 @@ The `mysql2` plugin is available for example. Use as followings:
 
 ```ruby
 ResolverReplace.load_plugin('mysql2')
-ResolverReplace.configure(
+ResolverReplace.register!(
   getaddress: Proc.new {|host| resolver.getaddress(host) },
   getaddresses: Proc.new {|host| resolver.getaddresses(host) },
   error_class: Resolv::ResolvError,
@@ -53,6 +53,10 @@ ResolverReplace.configure(
 ## ChangeLog
 
 See [CHANGELOG.md](CHANGELOG.md) for details.
+
+## See Also
+
+* [例えば Resolver をすげかえる - sonots:blog](http://blog.livedoor.jp/sonots/archives/38822072.html)
 
 ## Contributing
 
