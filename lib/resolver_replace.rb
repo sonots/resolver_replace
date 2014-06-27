@@ -1,3 +1,5 @@
+require 'resolver_replace/error'
+
 class ResolverReplace
   def self.register!(params = {})
     unless @getaddress = params[:getaddress]
@@ -22,7 +24,7 @@ class ResolverReplace
   end
 
   def self.load_plugin(name)
-    load "resolver_replace/plugins/#{name}.rb"
+    require "resolver_replace/plugins/#{name}"
   end
 end
 
