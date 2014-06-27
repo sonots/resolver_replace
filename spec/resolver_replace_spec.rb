@@ -26,17 +26,23 @@ describe ResolverReplace do
     end
   end
 
-  it 'mysql2' do
-    require 'mysql2'
-    ResolverReplace.load_plugin("mysql2")
-    begin
-      Mysql2::Client.new(
-        host: 'foo',
-        username: 'root',
-        database: 'foo',
-      )
-    rescue => e
-      expect(e.message).not_to match(/Unknown MySQL server/)
+  context 'mysql2' do
+    it 'load error' do
+      expect { ResolverReplace.load_plugin("mysql2") }.to raise_error(ResolverReplace::PluginLoadError)
+    end
+
+    it 'load' do
+      require 'mysql2'
+      ResolverReplace.load_plugin("mysql2")
+      begin
+        Mysql2::Client.new(
+          host: 'foo',
+          username: 'root',
+          database: 'foo',
+        )
+      rescue => e
+        expect(e.message).not_to match(/Unknown MySQL server/)
+      end
     end
   end
 end
