@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resolver_replace (0.0.1)
+    resolver_replace (0.0.2)
 
 GEM
   remote: https://rubygems.org/
