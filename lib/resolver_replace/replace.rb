@@ -8,7 +8,8 @@ class << IPSocket
   # :startdoc:
   def getaddress(host)
     begin
-      return ResolverReplace.getaddress(host).to_s
+      host = ResolverReplace.getaddress(host).to_s if host and host != ""
+      return host
     rescue ResolverReplace.error_class => e
       raise SocketError, "#{e.class} #{e.message}"
     end
@@ -20,7 +21,7 @@ class TCPSocket < IPSocket
   alias original_resolver_initialize initialize
   # :startdoc:
   def initialize(host, serv, *rest)
-    rest[0] = IPSocket.getaddress(rest[0]) unless rest.empty?
+    rest[0] = IPSocket.getaddress(rest[0]) if !rest.empty? and rest[0]
     original_resolver_initialize(IPSocket.getaddress(host), serv, *rest)
   end
 end
@@ -48,7 +49,7 @@ class UDPSocket < IPSocket
     if rest.length == 2
       host, port = rest
       begin
-        addrs = ResolverReplace.getaddresses(host)
+        addrs = (host and host != "") ? ResolverReplace.getaddresses(host) : []
       rescue ResolverReplace.error_class => e
         raise SocketError, "#{e.class} #{e.message}"
       end
