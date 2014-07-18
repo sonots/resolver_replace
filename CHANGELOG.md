@@ -1,3 +1,9 @@
+## 0.1.0 (2014/07/18)
+
+Fixes:
+
+* (Critical) Add nil check not to get errors in Net::HTTP#connect
+
 ## 0.0.3 (2014/07/17)
 
 Changes:
